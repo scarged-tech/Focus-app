@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  background-color: #050505;
+}
+
+/* Fuerza a que TODOS los controles nativos (checkboxes, radios, range,
+   el ícono del selector de fecha en la mayoría de navegadores) usen
+   nuestro color de acento violeta en vez del azul por defecto del navegador. */
+:root {
+  accent-color: #8B5CF6;
+  color-scheme: dark;
+}
+
+/* Respeta el notch / home indicator en iPhone cuando la app corre
+   como PWA instalada (display: standalone) */
+body {
+  padding-top: env(safe-area-inset-top);
+}
+
+@layer utilities {
+  /* Texto con degradado de marca (violeta -> azul cielo), para titulares
+     y wordmarks — se reserva para texto grande, en textos chicos el
+     degradado no se alcanza a leer bien. */
+  .text-gradient {
+    background-image: linear-gradient(135deg, #8B5CF6 0%, #38BDF8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Resplandor decorativo (blob difuminado) usado con moderación detrás
+     de tarjetas destacadas, imitando el brillo de foto de producto. */
+  .bg-glow-brand {
+    background-image: radial-gradient(circle, rgba(139, 92, 246, 0.35), transparent 70%);
+  }
+}
+
+@layer components {
+  /* Único botón con degradado: reservado para la acción principal
+     (crear/guardar), el resto de la UI se queda en tonos sólidos. */
+  .btn-primary {
+    @apply bg-gradient-brand text-white font-medium rounded-full shadow-[0_4px_20px_-4px_rgba(139,92,246,0.55)] hover:brightness-110 active:brightness-95 transition-all;
+  }
+}
